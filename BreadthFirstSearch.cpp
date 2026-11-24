@@ -41,7 +41,7 @@ class Graph{
             int u = q.front();
             q.pop();
             
-            cout << q << " ";
+            cout << u << " ";
             for(auto i : adjLIST[u]){
                 if(!visited[i]){
                     visited[i] = true;
