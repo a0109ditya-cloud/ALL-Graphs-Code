@@ -28,39 +28,6 @@ Class Graph{
         }
     }
     
-    bool isCyclic(vector<bool>& vis, vector<bool>& revis, int curr){
-        revis[curr] = true;
-        vis[curr] = true;
-        
-        for(auto i : adj[u]){
-            if(!vis[i]){
-                if(isCyclic(vis, revis, i)){
-                    return true;
-                }
-                
-            }
-            else if(revis[i]){
-                return true;
-            }
-        }
-        revis[curr] = false;
-        vis[curr] = false;
-        return false;
-    }
-    
-    bool FullCyclic(){
-        vector<bool> rev(n, false);
-        vector<bool> recpath(n, false);
-        
-        
-        for(int i=0;i<n;i++){
-            if(!vis[i]){
-                if(isCyclic(vis, recpath, i)){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+   
     
 };
