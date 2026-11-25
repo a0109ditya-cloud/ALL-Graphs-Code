@@ -1,45 +1,66 @@
 #include<iostream>
 #include<unordered_map>
 #include<list>
-using namespace std;
-class Graph{
+using namespace sdt;
+Class Graph{
   public:
-    unordered_map<int ,list<int>> adj;
+    int n;
+    unordered_map<int, list<bool>> adj;
+    Graph(int n){
+        this -> n = n;
+    }
     
-    
-    void adjacentLIST(int u, int m, int direction){
-        adj[u].push_back(m);
+    void adj(int a, int b, int direction){
+        adj[a].push_back(b);
+        
         if(direction == 0){
-            adj[m].push_back(u);
+            adj[b].push_back(a);
         }
     }
     
     void print(){
         for(auto i : adj){
             cout << i.first << "-->";
-            for(auto j : i.second){
+            for(int j=0;j<i.second;i++){
                 cout << j << " ";
-            }cout << endl;
+            }
+            cout << endl;
         }
     }
-};
-int main(){
-    Graph g;
-    int n;
-    cout << "enter the number of nodes in the graph : ";
-    cin >> n;
-    int m;
-    // this the number of edges in the graph
-    cout << "enter the number of edges : ";
-    cin >> m;
-    int u;
-    int v;
-    for(int i=0;i<m;i++){
-        cin >> u >> v;
-        g.adjacentLIST(u, v, 0);
+    
+    bool isCyclic(vector<bool>& vis, vector<bool>& revis, int curr){
+        revis[curr] = true;
+        vis[curr] = true;
+        
+        for(auto i : adj[u]){
+            if(!vis[i]){
+                if(isCyclic(vis, revis, i)){
+                    return true;
+                }
+                
+            }
+            else if(revis[i]){
+                return true;
+            }
+        }
+        revis[curr] = false;
+        vis[curr] = false;
+        return false;
     }
     
-    g.print();
-    return 0;
+    bool FullCyclic(){
+        vector<bool> rev(n, false);
+        vector<bool> recpath(n, false);
+        
+        
+        for(int i=0;i<n;i++){
+            if(!vis[i]){
+                if(isCyclic(vis, recpath, i)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     
-}
+};
