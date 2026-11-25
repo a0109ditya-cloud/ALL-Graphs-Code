@@ -46,4 +46,19 @@ Class Graph{
         return false;
     }
     
+    bool FullCyclic(){
+        vector<bool> rev(n, false);
+        vector<bool> recpath(n, false);
+        
+        
+        for(int i=0;i<n;i++){
+            if(!vis[i]){
+                if(isCyclic(vis, recpath, i)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
 };
