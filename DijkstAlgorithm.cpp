@@ -38,6 +38,7 @@ Class Graph{
             for(edge i : edges[u]){
                 if(dist[i.v] > dist[u] + i.wt){
                     dist[i.v] = dist[u] + i.wt;
+                  pq.push({dist[i.v], u});
                 }
             }
         }
